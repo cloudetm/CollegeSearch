@@ -51,7 +51,7 @@ function GetInformationFromSearchQueriesTable(db)
 {
 	db.transaction(
 	//function sql statements
-	function (tx){
+	function (tx){alert
 		ensureTableSearchQueriesExists(tx);
 		tx.executeSql('SELECT * FROM SearchQueries', 
 		[], 
