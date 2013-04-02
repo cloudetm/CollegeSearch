@@ -1,0 +1,142 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Filters</title>
+		
+		<link 	type="text/css" href="../libraries/jqueryMobile/jquery.mobile-1.3.0.min.css" rel="stylesheet" />
+		<link 	type="text/css" href="../styles/filters.css" rel="stylesheet" />
+		
+		<script type="text/javaScript" src="../libraries/jquery/jquery-1.9.1.min.js"></script>
+		<script type="text/javaScript" src="../libraries/jqueryMobile/jquery.mobile-1.3.0.min.js"></script>
+		<script type="text/javaScript" src="../libraries/cordova-2.5.0.js"></script>
+		<script type="text/javaScript" src="../libraries/json.js"></script>
+		<script type="text/javaScript" src="../scripts/workWithCookie.js"></script>
+		<script type="text/javaScript" src="../scripts/workWithDB.js"></script>
+		
+		<script type="text/javaScript">
+		var db = null;
+		function onDeviceReady(){
+			var searchButton = $("#search");
+			searchButton.on("click",
+			function(){
+				var jsonObj = {
+					schoolName: $("div input#schoolName").val(),
+					city: $("div input#city").val()
+				}
+				var jsonStr = JSON.stringify(jsonObj);
+				db = createDataBase("contactDB", "1.0", "Contact Database", 1000000);
+				AddInformationToSearchQueriesTable(db, jsonStr);
+				location.href="searchResults.html";
+			}
+			);
+		
+		}
+		
+		document.addEventListener("deviceready", onDeviceReady, false);
+		
+		
+		</script>
+		
+	</head>
+	
+	<body>
+	<div data-role="page" id="filtersPage">
+		<div data-role="header">
+			<a href="main.html" data-icon="home">Home</a>
+			<h1>Filters</h1>
+			<a href="#" data-icon="back">Logout</a>
+		</div>
+    	<div data-role="content">
+        	<div data-role="collapsible-set">
+            	<div data-role="collapsible">
+                	<h3>
+                    	Name&amp;Location
+                	</h3>
+                	<div>
+                        <form id="FiltersForm" action="#" method="POST">
+                        <div data-role="fieldcontain" id="schoolName">
+                            <fieldset data-role="controlgroup">
+                                <label for="schoolName">
+                                    School Name:
+                                </label>
+                                <input name="schoolName" id="schoolName" placeholder="" value="" type="text">
+                            </fieldset>
+                        </div>
+                        <div data-role="fieldcontain" id="city">
+                            <fieldset data-role="controlgroup">
+                                <label for="city">
+                                    City:
+                                </label>
+                                <input name="city" id="city" placeholder="" value="" type="text">
+                            </fieldset>
+                        </div>
+                        <div data-role="fieldcontain" id="milesFromZip" class="milesFromZipBlock">
+                            <fieldset data-role="controlgroup">
+                                <label for="milesFromZip">
+                                    Miles from Zip Code:
+                                </label>
+                                <input name="milesFromZip" id="milesFromZip" placeholder="" value="" type="number">
+                            </fieldset>
+                        </div>
+                        <div data-role="fieldcontain" id="zipMiles">
+                            <select id="zipMiles" name="zipMiles">
+                                <option value="" selected="selected"></option>
+                                <option value="25">&lt;25 </option>
+                                <option value="50">&lt;50 </option>
+                                <option value="100">&lt;100 </option>
+                                <option value="200">&lt;200 </option>
+                                <option value="300">&lt;300 </option>
+                                <option value="500">&lt;500 </option>
+                                <option value="100">&lt;1000 </option>
+                            </select>
+                        </div>
+                        <div data-role="fieldcontain" id="country">
+                            <label for="country">
+                                Country:
+                            </label>
+                            <select id="country" name="country">
+                                <option value="X" selected="selected">Doesn't matter</option>
+                                <option value="USA">United States</option>
+                                <option value="CAN">Canada</option>
+                                <option value="FRA">France</option>
+                                <option value="DEU">Germany</option>
+                                <option value="GRC">Greece</option>
+                                <option value="ITA">Italy</option>
+                                <option value="ESP">Spain</option>
+                                <option value="CHE">Switzerland</option>
+                                <option value="GBR">United Kingdom</option>
+                            </select>
+                        </div>
+                        </form>
+                    </div>
+            	</div>
+            	<div data-role="collapsible">
+                	<h3>
+                    	Cost of Attendance
+                	</h3>
+                	<div>
+                		<div data-role="fieldcontain" id="lowCost">
+            				<fieldset data-role="controlgroup">
+                				<label for="lowCost" class="leftLabel">Low: $</label>
+                				<input name="lowCost" class="centerInput" id="lowCost" placeholder="" value="" type="number">
+                				<label for="lowCost" class="rightLabel">/ year</label>
+            				</fieldset>
+        				</div>
+        				<div data-role="fieldcontain" id="highCost">
+            				<fieldset data-role="controlgroup">
+                				<label for="highCost" class="leftLabel">High: $</label>
+                				<input name="highCost" class="centerInput" id="highCost" placeholder="" value="" type="number">
+                				<label for="highCost" class="rightLabel">/ year</label>
+            				</fieldset>
+        				</div>
+                	</div>
+            	</div>
+            	<button id="search" data-transition="none" data-theme="a" data-icon="search" data-iconpos="right">
+             		Search
+            	</button>
+        	</div>
+    	</div>
+	</div>
+	</body>
+
+</html>

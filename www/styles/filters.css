@@ -1,0 +1,57 @@
+#zipMiles
+{
+    float:left;
+    width:45%;
+    clear:none;
+    margin-top:26px;
+    margin-left:10px;
+}
+.milesFromZipBlock
+{
+    clear: none;
+    float: left;
+    margin-right: 15px;
+    width: 50%;
+}
+#zipMiles .ui-btn-inner
+{
+	padding: 7px 5px;
+} 
+.ui-field-contain, fieldset.ui-field-contain
+{
+	margin: 0;
+    overflow: visible;
+    padding: 0.8em 0;
+}
+.ui-br
+{
+	border:none;
+}
+.leftLabel
+{
+	clear:none;
+	float:left;
+}
+.rightLabel
+{
+	clear:none;
+	float:left;
+}
+div#lowCost div.ui-input-text
+{
+    float: left;
+    width: 50%;
+}
+div#lowCost label.ui-input-text
+{
+	margin:7px 5px 0px 5px;
+}
+div#highCost div.ui-input-text
+{
+    float: left;
+    width: 50%;
+}
+div#highCost label.ui-input-text
+{
+	margin:7px 5px 0px 5px;
+}
