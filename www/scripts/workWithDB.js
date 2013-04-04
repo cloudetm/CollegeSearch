@@ -18,6 +18,8 @@ function AddInformationToSearchQueriesTable(db,query)
     function (tx){
     	ensureTableSearchQueriesExists(tx); 
 		var sql = 'INSERT INTO SearchQueries (searchQuery) VALUES ("'+query+'")';
+		alert('sql:');
+		alert(sql);
 		tx.executeSql(sql);
 	},
 	//error callback
@@ -35,7 +37,7 @@ function AddInformationToSavedSearchesTable(db,searchName,searchQuery)
     //function sql statements
     function (tx){
     	ensureTableSavedSearchesExists(tx); 
-		var sql = 'INSERT INTO SearchQueries (searchName, searchQuery) VALUES ("'+searchName+'", "'+ searchQuery +'")';
+		var sql = 'INSERT INTO SavedSearches (searchName, searchQuery) VALUES ("'+searchName+'", "'+ searchQuery +'")';
 		tx.executeSql(sql);
 	},
 	//error callback
@@ -47,8 +49,9 @@ function AddInformationToSavedSearchesTable(db,searchName,searchQuery)
 	}
     );
 }
-function GetInformationFromSearchQueriesTable(db)
+function GetInformationFromSearchQueriesTable(db,data)
 {
+	var functionResult = null;
 	db.transaction(
 	//function sql statements
 	function (tx){
@@ -61,9 +64,12 @@ function GetInformationFromSearchQueriesTable(db)
 			for(var index=0;index<results.rows.length;index++)
 			{
 				var item = results.rows.item(index);
-				htmlStr=htmlStr+item.searchQuery;                                                                                                                
+				var searchQueryItem = unescape(item.searchQuery);
+				htmlStr=htmlStr+searchQueryItem;                                                                                                              
 			}
-			return htmlStr;
+			functionResult = htmlStr;
+			data = htmlStr;
+			alert("dddata="+data);
         },
 		function(err)
 		{
@@ -76,6 +82,29 @@ function GetInformationFromSearchQueriesTable(db)
 			alert("error callback "+err.code+" "+err.message);                                                                
 		},
 		//success callback
-		function (){}
+		function (){
+		alert("hi");
+		return functionResult;
+		}
 		); 
+}
+
+function CleanSearchQueriesTable(db)
+{
+	db.transaction(
+	//function sql statements
+	function (tx){
+		ensureTableExists(tx);
+		tx.executeSql('Delete FROM SearchQueries');                                                                                                                                                 
+	},
+	//error callback
+	function (err){
+		alert("error callback "+err.code+" "+err.message);                                                                
+	},
+	//success callback
+	function (err){                                                               
+	}
+	);
+                                
+                                 
 }

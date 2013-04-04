@@ -14,11 +14,42 @@
 		
 		<script type="text/javaScript">
 		var db = null;
+		var query = null;
+		var data = null;
+		var intervalId = null;
+		
+		function CleanSearchResults()
+		{
+			CleanSearchQueriesTable(db);
+		}
+		
+		function SaveSearchResults()
+		{
+			alert("query = "+query);
+			AddInformationToSavedSearchesTable(db, $("#resultName"), query);
+		}
+		
 		function onDeviceReady(){
 		db = createDataBase("contactDB", "1.0", "Contact Database", 1000000);
-		var data = GetInformationFromSearchQueriesTable(db);
+		
+		intervalId=setInterval(function(){
+		GetInformationFromSearchQueriesTable(db, data);
+		alert("data2= "+data);
+		query = data;
+		if(query)
+		{
+			clear();
+		}	
+		},1);
+		function clear()
+		{
+		clearInterval(intervalId);
+		}
+		alert('data:');
 		alert(data);
 		
+		$("#clean").on("click",CleanSearchResults);
+		$("#submitSave").on("click",SaveSearchResults);
 		}
 		
 		document.addEventListener("deviceready", onDeviceReady, false);
@@ -29,13 +60,40 @@
 	</head>
 	
 	<body >
-	<div data-role="page" id="main" data-add-back-btn="true" data-direction="reverse">
+	<div data-role="page" id="main" data-direction="reverse">
         <div data-role="header">
+        	<a href="main.html" data-icon="home">Home</a>
             <h1>Search Results</h1>
+            <a href="#" data-icon="back">Logout</a>
         </div>
         <div data-role="content">
 			Welcome to search results page!
         </div>
+        <div data-role="footer" class="ui-bar">
+        <button id="clean" data-transition="none" data-theme="a" data-icon="delete" data-iconpos="right">
+             		Clean
+        </button>
+		<a data-role="button" data-rel="dialog" href="#dialog" id="save" data-transition="pop" data-theme="a" data-icon="star" data-iconpos="right">
+             		Save
+        </a>
+        </div>
+    </div>
+    <div data-role="page" id="dialog">
+    	<div data-role="header">
+    		<h1>Save search results</h1>
+    	</div>
+    	<div data-role="content">
+    		<h5>Please insert name for search result</h5>
+    		<div data-role="fieldcontain" id="searchResult">
+        		<fieldset data-role="controlgroup">
+        			<label for="city">Result name:</label>
+                    <input name="resultName" id="ResultName" placeholder="" value="" type="text">
+                </fieldset>
+             </div>
+             <button id="submitSave" data-transition="none" data-theme="a" data-icon="star" data-iconpos="right">
+             		Save
+        	 </button>
+    	</div>
     </div>
 	</body>
 

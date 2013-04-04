@@ -22,8 +22,8 @@
 				var jsonObj = {
 					schoolName: $("div input#schoolName").val(),
 					city: $("div input#city").val()
-				}
-				var jsonStr = JSON.stringify(jsonObj);
+				};
+				var jsonStr = escape(JSON.stringify(jsonObj));
 				db = createDataBase("contactDB", "1.0", "Contact Database", 1000000);
 				AddInformationToSearchQueriesTable(db, jsonStr);
 				location.href="searchResults.html";
