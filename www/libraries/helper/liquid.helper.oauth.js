@@ -96,7 +96,7 @@
 			// Now open new browser
 			alert(window.plugins);
 			alert(window.plugins.childBrowser);
-			window.plugins.childBrowser.showWebPage("http://www.google.com");		
+			window.plugins.childBrowser.showWebPage(authUri, {showLocationBar : true});		
 			window.plugins.childBrowser.onClose = $this.onAuthClose;		
 			window.plugins.childBrowser.onLocationChange = $this.onAuthUrlChange;	
 		},
