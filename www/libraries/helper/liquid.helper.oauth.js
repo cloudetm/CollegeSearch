@@ -86,11 +86,12 @@
 			+ '&' + 'access_type=' + encodeURIComponent(gapiConfig.access_type)
 			+ '&' + 'approval_prompt=force'; // @TODO - check if we really need this param
 			
-			$this.callbackFunc = callBack;alert($this.callbackFunc);
+			$this.callbackFunc = callBack;
 			$this.requestStatus = $this.status.NOT_DETERMINED;
 
 			// Now open new browser
-			window.plugins.childBrowser.showWebPage(authUri, {showLocationBar : true});		
+			alert(window.plugins.childBrowser);
+			window.plugins.childBrowser.showWebPage("http://www.google.com");		
 			window.plugins.childBrowser.onClose = $this.onAuthClose;		
 			window.plugins.childBrowser.onLocationChange = $this.onAuthUrlChange;	
 		},
