@@ -1,5 +1,4 @@
 $(document).ready(function() {
-     
     /* startApp after device ready */
     document.addEventListener("deviceready", startApp, false);
 });
@@ -9,10 +8,10 @@ $(document).ready(function() {
  * Start the App
  */
 function startApp() {
-     
     var oAuth = liquid.helper.oauth;
      
     $("#access-code").click(function(event) {
+    alert('click');
         liquid.helper.oauth.authorize(authorizeWindowChange);
         event.preventDefault();
     });
@@ -34,6 +33,7 @@ function startPageTaskList() {
  
  
 function authorizeWindowChange(uriLocation) {
+alert('authorizeWindowChange');
     //console.log("Location Changed: " + uriLocation); 
     var oAuth = liquid.helper.oauth;
      
@@ -121,7 +121,7 @@ function goHome() {
  
 (function() {
  
-    $('#page-tasklist').live('pageshow', function(event) {
+    $('#page-tasklist').on('pageshow', function(event) {
          
         if (!liquid.helper.oauth.isAuthorized()) {
             goHome();

@@ -77,7 +77,6 @@
 		{
 			var $this = helper.oauth;
 			var gapiConfig = liquid.config.gapi;
-
 			var authUri = gapiConfig.endpoint + '?' 
 			+ 'scope=' + encodeURIComponent(gapiConfig.scope) 
 			+ '&' + 'redirect_uri=' + encodeURIComponent(gapiConfig.redirect_uri) 
@@ -86,14 +85,14 @@
 			+ '&' + 'state=' + encodeURIComponent(gapiConfig.state)
 			+ '&' + 'access_type=' + encodeURIComponent(gapiConfig.access_type)
 			+ '&' + 'approval_prompt=force'; // @TODO - check if we really need this param
-
-			$this.callbackFunc = callBack;
+			
+			$this.callbackFunc = callBack;alert($this.callbackFunc);
 			$this.requestStatus = $this.status.NOT_DETERMINED;
 
 			// Now open new browser
-			window.plugins.childBrowser.showWebPage(authUri, {showLocationBar : true}); 		
+			window.plugins.childBrowser.showWebPage(authUri, {showLocationBar : true});		
 			window.plugins.childBrowser.onClose = $this.onAuthClose;		
-			window.plugins.childBrowser.onLocationChange = $this.onAuthUrlChange;		
+			window.plugins.childBrowser.onLocationChange = $this.onAuthUrlChange;	
 		},
 
 		/* Auth Window closed */
