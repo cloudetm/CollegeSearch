@@ -75,6 +75,7 @@
 		 */
 		authorize: function(callBack) 
 		{
+		alert('authorize');
 			var $this = helper.oauth;
 			var gapiConfig = liquid.config.gapi;
 			var authUri = gapiConfig.endpoint + '?' 
@@ -85,11 +86,15 @@
 			+ '&' + 'state=' + encodeURIComponent(gapiConfig.state)
 			+ '&' + 'access_type=' + encodeURIComponent(gapiConfig.access_type)
 			+ '&' + 'approval_prompt=force'; // @TODO - check if we really need this param
-			
+						alert($this);
+						alert(gapiConfig);
+						alert(authUri);
 			$this.callbackFunc = callBack;
 			$this.requestStatus = $this.status.NOT_DETERMINED;
-
+			alert($this.callbackFunc);
+			alert($this.requestStatus);
 			// Now open new browser
+			alert(window.plugins);
 			alert(window.plugins.childBrowser);
 			window.plugins.childBrowser.showWebPage("http://www.google.com");		
 			window.plugins.childBrowser.onClose = $this.onAuthClose;		
